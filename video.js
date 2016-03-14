@@ -3,10 +3,28 @@ document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer
 var mediaPlayer;
 
 function initialiseMediaPlayer() {
-   mediaPlayer = document.getElementById('media-video');
-   mediaPlayer.controls = false;
-   mediaPlayer.addEventListener('timeupdate', updateProgressBar, false);
-   mediaPlayer.addEventListener('progress', updateBufferBar);
+	mediaPlayer = document.getElementById('media-video');
+	mediaPlayer.controls = false;
+	mediaPlayer.addEventListener('timeupdate', updateProgressBar, false);
+	mediaPlayer.addEventListener('progress', updateBufferBar);
+
+	videoBody = document.getElementById('media-player');
+	playerControls = document.getElementById('player-controls');
+	videoBody.onmouseover = function() { 
+	    playerControls.style.visibility = "visible";
+	}
+	videoBody.onmouseout = function() { 
+	    playerControls.style.visibility = "hidden";
+	}
+
+	playPauseButton = document.getElementById('play-pause-button');
+	playPauseButton.onmouseover = function() { 
+	    playPauseButton.style.background = "rgba(0, 173, 239,.75)";
+	}	
+	playPauseButton.onmouseout = function() { 
+	    playPauseButton.style.background = "rgba(23,35,34,.75)";
+	}
+
 }
 
 function togglePlayPause() {
@@ -72,3 +90,4 @@ function updateBufferBar() {
 	var bufferBar = document.getElementById('buffer-bar');
 	bufferBar.style.width = loadPercentage + '%';  
 }
+

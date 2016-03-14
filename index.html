@@ -5,6 +5,7 @@
 	<title>Vimeo Video Player</title>
 	<link href='video.css' rel='stylesheet'/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src='vanilla.js'></script> 
 	<script src='video.js'></script> 
 </head>
 
@@ -15,7 +16,7 @@
 			<source src="https://player.vimeo.com/external/76979871.hd.mp4?s=700bf8f30f8f8114cc372e94c4156aaf&profile_id=113" type="video/mp4">
             <!--<source src='parrots.webm' type='video/webm'>-->
         </video>
-        <div class="player-controls">
+        <div id="player-controls" class="player-controls">
            <button id='play-pause-button' class="play-button"
 			onclick='togglePlayPause();'>
 				<div class="play-icon">
