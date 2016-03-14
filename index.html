@@ -4,25 +4,22 @@
 <head>
 	<title>Vimeo Video Player</title>
 	<link href='video.css' rel='stylesheet'/>
-	<script src='video.js'></script> 
 </head>
 
 <body>
-	<div id='media-player'>
-		<video id='media-video'>
+	<div id='vimeo-video-player'><!--media-player-->
+		<video id='video-player' preload='auto'><!--media-video-->
 			<source src="https://player.vimeo.com/external/76979871.hd.mp4?s=700bf8f30f8f8114cc372e94c4156aaf&profile_id=113" type="video/mp4">
         </video>
         <div id="player-controls" class="player-controls" visibility="hidden">
            <button id='play-pause-button' class="play-button"
 			onclick='togglePlayPause();'>
-				<div class="play-icon">
-					<!--
-					<svg viewBox="0 0 20 20" preserveAspectRatio="none">
+				<div id="play-icon" class="play-icon">
+					<svg viewBox="0 0 20 20" preserveAspectRatio="xMidYMid">
 						<polygon points="1,0 20,10 1,20" class="fill"/>
 					</svg>
-					-->
 				</div>
-				<div class="pause-icon">
+				<div id="pause-icon" class="pause-icon">
 					<svg viewBox="0 0 20 20" preserveAspectRatio="xMidYMid">
 						<rect width="6" height="20" x="0" y="0" />
 						<rect width="6" height="20" x="12" y="0" />
@@ -30,19 +27,13 @@
 				</div>
 			</button>
 			<div class="rounded-box">
-				<div id="progress-bar-container"class="progress">
+				<div id="progress-bar-container" class="progress">
 					<div id="buffer-bar" class="loaded"></div>
 					<div id="progress-bar" class="played"></div>
 				</div>
 			</div>
-			<!--
-			<button id='stop-button' class='stop' title='stop' onclick='stopPlayer();'>Stop</button>
-			<button id='volume-inc-button' class='volume-plus' title='increase volume'
-			onclick='changeVolume("+");'>Increase volume</button>
-			<button id='volume-dec-button' class='volume-minus' title='decrease volume'
-			onclick='changeVolume("-");'>Decrease volume</button>
-			<button id='replay-button' class='replay' title='replay' onclick='replayMedia();'>Replay</button>
-			-->
-	</div>	
+		</div>
+	</div>
+	<script src='video.js'></script> 
 </body>
 </html>

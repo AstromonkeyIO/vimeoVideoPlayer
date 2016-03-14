@@ -1,14 +1,124 @@
-document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
+/*
+*	Vimeo Video Player
+*	- Basic Vimeo video player built by Tom Lee
+*/
 
+var VimeoVideoPlayer = function() {
+	this.vimeoVideoPlayer = "";
+	this.videoPlayer = "";
+	this.videoPlayerControls = "";
+	this.playPauseButton = "";
+	this.progressBarContainer = "";
+	this.progressBar = "";
+	this.bufferBar = "";
+	this.currentVideoProgress = 0;
+	this.currentBufferProgress = 0;
+};
+
+VimeoVideoPlayer.prototype.init = function() {
+	this.vimeoVideoPlayer = document.getElementById('vimeo-video-player');	
+	this.videoPlayer = document.getElementById('video-player');
+	this.videoPlayerControls = document.getElementById('player-controls');
+	this.playPauseButton = document.getElementById('play-pause-button');
+
+	console.log(document.getElementById('play-pause-button'));
+    this.progressBarContainer = document.getElementById('progress-bar-container');	
+    this.progressBar = document.getElementById('progress-bar');
+    this.bufferBar = document.getElementById('buffer-bar');
+
+    document.getElementById('video-player').controls = false;
+    document.getElementById('video-player').load();
+};
+
+VimeoVideoPlayer.prototype.updateProgressAndBufferBar = function() {
+	document.getElementById('video-player').addEventListener('timeupdate', this.updateProgressBar, false);
+	document.getElementById('video-player').addEventListener('progress', this.updateBufferBar);
+};
+
+VimeoVideoPlayer.prototype.updateProgressBar = function() {
+	var videoPlayer = document.getElementById('video-player');
+    var progressBar = document.getElementById('progress-bar');
+   	var percentage = (100 / videoPlayer.duration) * videoPlayer.currentTime;
+   	this.currentVideoProgress = percentage;
+   	progressBar.style.width = percentage + '%';  
+   	console.log("progress bar " + percentage);
+};
+
+VimeoVideoPlayer.prototype.updateBufferBar = function() {
+    var range = 0;
+    var bf = this.buffered;
+    var time = this.currentTime;
+
+    while(!(bf.start(range) <= time && time <= bf.end(range))) {
+        range += 1;
+    }
+    var loadStartPercentage = bf.start(range) / this.duration;
+    var loadEndPercentage = bf.end(range) / this.duration;
+    var loadPercentage = (loadEndPercentage - loadStartPercentage)*100;
+    this.currentBufferProgress = loadPercentage;
+	document.getElementById('buffer-bar').style.width = loadPercentage + '%';  
+};
+
+VimeoVideoPlayer.prototype.togglePlayPause = function() {
+	if (this.videoPlayer.paused || this.videoPlayer.ended) {
+		this.videoPlayer.play();
+		document.getElementById('play-icon').style.display = 'none';
+		document.getElementById('pause-icon').style.display = 'block';
+   	}
+   	else {
+    	this.videoPlayer.pause();
+		document.getElementById('play-icon').style.display = 'block';
+		document.getElementById('pause-icon').style.display = 'none';
+   	}
+};
+
+VimeoVideoPlayer.prototype.updateVideoProgressOnClick = function() {
+	document.getElementById('progress-bar-container').addEventListener("click", this.seek);
+};
+
+VimeoVideoPlayer.prototype.seek = function(e) {
+	var videoPlayer = document.getElementById('video-player');
+	var progressBar = document.getElementById('progress-bar');
+
+    var percent = e.offsetX / this.offsetWidth;
+    videoPlayer.currentTime = percent * videoPlayer.duration;
+    progressBar.style.width = percent / 100;
+};
+
+VimeoVideoPlayer.prototype.showAndHidePlayerControls = function() {
+	this.vimeoVideoPlayer.onmouseover = function() { 
+	    document.getElementById('player-controls').style.visibility = "visible";
+	}
+	this.vimeoVideoPlayer.onmouseout = function() { 
+	    document.getElementById('player-controls').style.visibility = "hidden";
+	}
+
+};
+
+VimeoVideoPlayer.prototype.changePlayerButtonColor = function() {
+	
+	var playPauseButton = document.getElementById('play-pause-button');
+
+	this.playPauseButton.onmouseover = function() { 
+	    playPauseButton.style.background = "rgba(0, 173, 239,.75)";
+	}	
+	this.playPauseButton.onmouseout = function() { 
+	    playPauseButton.style.background = "rgba(23,35,34,.75)";
+	}
+
+};
+
+
+/*
 var mediaPlayer;
 
 function initialiseMediaPlayer() {
-	mediaPlayer = document.getElementById('media-video');
+	mediaPlayer = document.getElementById('video-player');
 	mediaPlayer.controls = false;
 	mediaPlayer.addEventListener('timeupdate', updateProgressBar, false);
 	mediaPlayer.addEventListener('progress', updateBufferBar);
 
-	videoBody = document.getElementById('media-player');
+	videoBody = document.getElementById('vimeo-video-player');
 	playerControls = document.getElementById('player-controls');
 	videoBody.onmouseover = function() { 
 	    playerControls.style.visibility = "visible";
@@ -38,7 +148,7 @@ function initialiseMediaPlayer() {
 }
 
 function seek(e) {
-	mediaPlayer = document.getElementById('media-video');
+	mediaPlayer = document.getElementById('video-player');
 	var progressBar = document.getElementById('progress-bar');
     var percent = e.offsetX / this.offsetWidth;
     mediaPlayer.currentTime = percent * mediaPlayer.duration;
@@ -46,15 +156,19 @@ function seek(e) {
 }
 
 function togglePlayPause() {
-   var btn = document.getElementById('play-pause-button');
-   if (mediaPlayer.paused || mediaPlayer.ended) {
-      btn.title = 'pause';
-      mediaPlayer.play();
-   }
-   else {
-      btn.title = 'play';
-      mediaPlayer.pause();
-   }
+	var btn = document.getElementById('play-pause-button');
+	if (mediaPlayer.paused || mediaPlayer.ended) {
+		btn.title = 'pause';
+		mediaPlayer.play();
+		document.getElementById('play-icon').style.display = 'none';
+		document.getElementById('pause-icon').style.display = 'block';
+   	}
+   	else {
+     	btn.title = 'play';
+    	mediaPlayer.pause();
+		document.getElementById('play-icon').style.display = 'block';
+		document.getElementById('pause-icon').style.display = 'none';
+   	}
 }
 
 function changeButtonType(btn, value) {
@@ -107,4 +221,22 @@ function updateBufferBar() {
 	var bufferBar = document.getElementById('buffer-bar');
 	bufferBar.style.width = loadPercentage + '%';  
 }
+*/
+
+var vimeoVideoPlayer = new VimeoVideoPlayer();
+vimeoVideoPlayer.init();
+vimeoVideoPlayer.showAndHidePlayerControls(); 
+vimeoVideoPlayer.changePlayerButtonColor();
+vimeoVideoPlayer.updateProgressAndBufferBar();
+vimeoVideoPlayer.updateVideoProgressOnClick();
+
+document.getElementById('video-player').addEventListener('progress', vimeoVideoPlayer.updateBufferBar());
+
+function togglePlayPause() {
+	vimeoVideoPlayer.togglePlayPause();
+}
+
+
+//document.addEventListener("DOMContentLoaded", function() { initialiseMediaPlayer(); }, false);
+
 
