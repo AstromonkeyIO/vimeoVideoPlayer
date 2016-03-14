@@ -6,8 +6,8 @@
 
 svg {
 	fill: white;
-	width: 100%;
-    height: 100%;
+	width: 40%;
+    height: 40%;
 }
 
 .play-button {
@@ -15,7 +15,7 @@ svg {
 	width: 100px;
 	background: rgba(23,35,34,.75);
 	border-radius: .8em;
-	padding: 15px;
+	//padding: 15px;
 	border: none;
 	outline: none;
 	margin-right: 10px;
