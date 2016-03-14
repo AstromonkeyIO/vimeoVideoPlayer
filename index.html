@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Vimeo Video Player</title>
+	<link href='video.css' rel='stylesheet'/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src='video.js'></script> 
+</head>
+
+<body>
+	<h1>Vimeo Video Player</h1>
+	<div id='media-player'>
+		<video id='media-video' controls>
+			<source src="https://player.vimeo.com/external/76979871.hd.mp4?s=700bf8f30f8f8114cc372e94c4156aaf&profile_id=113" type="video/mp4">
+            <!--<source src='parrots.webm' type='video/webm'>-->
+        </video>
+        <div class="player-controls">
+           <button id='play-pause-button' class="play-button"
+			onclick='togglePlayPause();'>
+				<div class="play-icon">
+					<!--
+					<svg viewBox="0 0 20 20" preserveAspectRatio="none">
+						<polygon points="1,0 20,10 1,20" class="fill"/>
+					</svg>
+					-->
+				</div>
+				<div class="pause-icon">
+					<svg viewBox="0 0 20 20" preserveAspectRatio="xMidYMid">
+						<rect width="6" height="20" x="0" y="0" />
+						<rect width="6" height="20" x="12" y="0" />
+					</svg>
+				</div>
+			</button>
+			<div class="rounded-box">
+				<div class="progress">
+					<div id="buffer-bar" class="loaded"></div>
+					<div id="progress-bar" class="played"></div>
+				</div>
+			</div>
+			<!--
+			<button id='stop-button' class='stop' title='stop' onclick='stopPlayer();'>Stop</button>
+			<button id='volume-inc-button' class='volume-plus' title='increase volume'
+			onclick='changeVolume("+");'>Increase volume</button>
+			<button id='volume-dec-button' class='volume-minus' title='decrease volume'
+			onclick='changeVolume("-");'>Decrease volume</button>
+			<button id='replay-button' class='replay' title='replay' onclick='replayMedia();'>Replay</button>
+			-->
+	</div>	
+</body>
+</html>
