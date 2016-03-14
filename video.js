@@ -34,6 +34,7 @@ function initialiseMediaPlayer() {
     var progressBarContainer = document.getElementById('progress-bar-container');
 	progressBarContainer.addEventListener("click", seek);
 
+
 }
 
 function seek(e) {
@@ -43,7 +44,6 @@ function seek(e) {
     mediaPlayer.currentTime = percent * mediaPlayer.duration;
     progressBar.style.width = percent / 100;
 }
-
 
 function togglePlayPause() {
    var btn = document.getElementById('play-pause-button');
