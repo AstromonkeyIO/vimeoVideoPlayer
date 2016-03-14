@@ -1,5 +1,7 @@
 #media-player {
 	position: relative;
+	height: 100%;
+	width: 100%;
 }
 
 svg {
@@ -90,7 +92,7 @@ svg {
 	background-color: rgb(0, 173, 239);
 	background-clip: padding-box!important;
     -webkit-transition: width 175ms cubic-bezier(.18,0,.07,1);
-    transition: width 175ms cubic-bezier(.18,0,.07,1);
+    transition: width 175ms cubic-bezier(.18,0,.07,1); 
 }
 
 .loaded {
@@ -101,8 +103,8 @@ svg {
     width: 0;
     background-color: #666;
     background-clip: padding-box!important;
-    -webkit-transition: width 175ms cubic-bezier(.18,0,.07,1);
-    transition: width 175ms cubic-bezier(.18,0,.07,1);
+    -webkit-transition: width 1s;
+    transition: width 1s;
 }
 /*
 .played {

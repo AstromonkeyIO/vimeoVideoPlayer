@@ -4,19 +4,16 @@
 <head>
 	<title>Vimeo Video Player</title>
 	<link href='video.css' rel='stylesheet'/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src='vanilla.js'></script> 
 	<script src='video.js'></script> 
 </head>
 
 <body>
-	<h1>Vimeo Video Player</h1>
 	<div id='media-player'>
-		<video id='media-video' controls>
+		<video id='media-video'>
 			<source src="https://player.vimeo.com/external/76979871.hd.mp4?s=700bf8f30f8f8114cc372e94c4156aaf&profile_id=113" type="video/mp4">
-            <!--<source src='parrots.webm' type='video/webm'>-->
         </video>
-        <div id="player-controls" class="player-controls">
+        <div id="player-controls" class="player-controls" visibility="hidden">
            <button id='play-pause-button' class="play-button"
 			onclick='togglePlayPause();'>
 				<div class="play-icon">
@@ -34,7 +31,7 @@
 				</div>
 			</button>
 			<div class="rounded-box">
-				<div class="progress">
+				<div id="progress-bar-container"class="progress">
 					<div id="buffer-bar" class="loaded"></div>
 					<div id="progress-bar" class="played"></div>
 				</div>

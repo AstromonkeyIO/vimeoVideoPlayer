@@ -25,7 +25,25 @@ function initialiseMediaPlayer() {
 	    playPauseButton.style.background = "rgba(23,35,34,.75)";
 	}
 
+	playerControls.style.visibility = "hidden";
+
+	mediaPlayer.addEventListener('loadeddata', function() {
+	   	playerControls.style.visibility = "visible";
+	}, false);	
+
+    var progressBarContainer = document.getElementById('progress-bar-container');
+	progressBarContainer.addEventListener("click", seek);
+
 }
+
+function seek(e) {
+	mediaPlayer = document.getElementById('media-video');
+	var progressBar = document.getElementById('progress-bar');
+    var percent = e.offsetX / this.offsetWidth;
+    mediaPlayer.currentTime = percent * mediaPlayer.duration;
+    progressBar.style.width = percent / 100;
+}
+
 
 function togglePlayPause() {
    var btn = document.getElementById('play-pause-button');
@@ -69,8 +87,7 @@ function resetPlayer() {
 
 function updateProgressBar() {
    var progressBar = document.getElementById('progress-bar');
-   var percentage = (100 / mediaPlayer.duration) *
-   mediaPlayer.currentTime;
+   var percentage = (100 / mediaPlayer.duration) * mediaPlayer.currentTime;
    progressBar.style.width = percentage + '%';  
    console.log("progress bar " + percentage);
 }
