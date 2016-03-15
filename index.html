@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<title>Vimeo Video Player</title>
+	<title>Vimeo Video Player Built By Tom Lee</title>
 	<link href='video.css' rel='stylesheet'/>
 </head>
-
 <body>
-
-	<div id='vimeo-video-player' class="vimeo-video-player"><!--media-player-->
-		<video id='video-player' preload='auto' class="video-player"><!--media-video-->
+	<div id='vimeo-video-player-example' class="vimeo-video-player"><!--media-player-->
+		<video preload='auto' class="video-player">
 			<source src="https://player.vimeo.com/external/76979871.hd.mp4?s=700bf8f30f8f8114cc372e94c4156aaf&profile_id=113" type="video/mp4">
         </video>
-        <div id="player-controls" class="player-controls" visibility="hidden">
-           <button id='play-pause-button' class="play-pause-button"
+        <div class="player-controls" visibility="hidden">
+           <button class="play-pause-button"
 			onclick='togglePlayPause();'>
-				<div id="play-icon" class="play-icon">
+				<div class="play-icon">
 					<svg viewBox="0 0 20 20" preserveAspectRatio="xMidYMid">
 						<polygon points="1,0 20,10 1,20" class="fill"/>
 					</svg>
 				</div>
-				<div id="pause-icon" class="pause-icon">
+				<div class="pause-icon">
 					<svg viewBox="0 0 20 20" preserveAspectRatio="xMidYMid">
 						<rect width="6" height="20" x="0" y="0" />
 						<rect width="6" height="20" x="12" y="0" />
@@ -30,12 +27,11 @@
 			<div class="rounded-box">
 				<div class="progress-bar-container">
 					<div class="buffer-bar"></div>
-					<div id="progress-bar" class="progress-bar"></div>
+					<div class="progress-bar"></div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<script src='video.js'></script> 
 </body>
 </html>
