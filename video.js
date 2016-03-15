@@ -3,48 +3,44 @@
 *	- Basic Vimeo video player built by Tom Lee
 */
 
-var VimeoVideoPlayer = function() {
-	this.vimeoVideoPlayer = "";
-	this.videoPlayer = "";
-	this.videoPlayerControls = "";
-	this.playPauseButton = "";
-	this.progressBarContainer = "";
-	this.progressBar = "";
-	this.bufferBar = "";
-	this.currentVideoProgress = 0;
+var VimeoVideoPlayer = function(rootElement) {
+	this.videoPlayerBody = rootElement;
+	this.videoPlayer = this.videoPlayerBody.querySelector(".video-player");
+	this.playerControls = this.videoPlayerBody.querySelector(".player-controls");
+	this.playPauseButton = this.videoPlayerBody.querySelector(".play-pause-button");
+    this.playIcon = this.videoPlayerBody.querySelector(".play-icon");
+    this.pauseIcon = this.videoPlayerBody.querySelector(".pause-icon");  
+    this.progressBarContainer = this.videoPlayerBody.querySelector('.progress-bar-container');		
+    this.progressBar = this.videoPlayerBody.querySelector('.progress-bar');	
+    this.bufferBar = this.videoPlayerBody.querySelector('.buffer-bar');	
+
+
+    this.videoPlayer.controls = false; 
+    this.videoPlayer.load();
+
+    this.currentVideoProgress = 0;
 	this.currentBufferProgress = 0;
-};
 
-VimeoVideoPlayer.prototype.init = function() {
-	this.vimeoVideoPlayer = document.getElementById('vimeo-video-player');	
-	this.videoPlayer = document.getElementById('video-player');
-	this.videoPlayerControls = document.getElementById('player-controls');
-	this.playPauseButton = document.getElementById('play-pause-button');
-
-	console.log(document.getElementById('play-pause-button'));
-    this.progressBarContainer = document.getElementById('progress-bar-container');	
-    this.progressBar = document.getElementById('progress-bar');
-    this.bufferBar = document.getElementById('buffer-bar');
-
-    document.getElementById('video-player').controls = false;
-    document.getElementById('video-player').load();
 };
 
 VimeoVideoPlayer.prototype.updateProgressAndBufferBar = function() {
-	document.getElementById('video-player').addEventListener('timeupdate', this.updateProgressBar, false);
-	document.getElementById('video-player').addEventListener('progress', this.updateBufferBar);
+	console.log("getting called");
+	this.videoPlayer.addEventListener('timeupdate', this.updateProgressBar(), false);
+	this.videoPlayer.addEventListener('progress', this.updateBufferBar(this));
 };
 
 VimeoVideoPlayer.prototype.updateProgressBar = function() {
 	var videoPlayer = document.getElementById('video-player');
     var progressBar = document.getElementById('progress-bar');
    	var percentage = (100 / videoPlayer.duration) * videoPlayer.currentTime;
-   	this.currentVideoProgress = percentage;
+   	console.log(percentage);
+   	//currentVideoProgress = percentage;
    	progressBar.style.width = percentage + '%';  
-   	console.log("progress bar " + percentage);
+   	//console.log("progress bar " + percentage);
 };
 
 VimeoVideoPlayer.prototype.updateBufferBar = function() {
+ 
     var range = 0;
     var bf = this.buffered;
     var time = this.currentTime;
@@ -56,24 +52,28 @@ VimeoVideoPlayer.prototype.updateBufferBar = function() {
     var loadEndPercentage = bf.end(range) / this.duration;
     var loadPercentage = (loadEndPercentage - loadStartPercentage)*100;
     this.currentBufferProgress = loadPercentage;
-	document.getElementById('buffer-bar').style.width = loadPercentage + '%';  
+	console.log(this.currentBufferProgress);
+	document.getElementById('buffer-bar').style.width = loadPercentage + '%'; 
+	
 };
 
 VimeoVideoPlayer.prototype.togglePlayPause = function() {
+
 	if (this.videoPlayer.paused || this.videoPlayer.ended) {
 		this.videoPlayer.play();
-		document.getElementById('play-icon').style.display = 'none';
-		document.getElementById('pause-icon').style.display = 'block';
+		this.playIcon.style.display = 'none';
+		this.pauseIcon.style.display = 'block';
    	}
    	else {
     	this.videoPlayer.pause();
-		document.getElementById('play-icon').style.display = 'block';
-		document.getElementById('pause-icon').style.display = 'none';
+		this.playIcon.style.display = 'block';
+		this.pauseIcon.style.display = 'none';
    	}
+
 };
 
 VimeoVideoPlayer.prototype.updateVideoProgressOnClick = function() {
-	document.getElementById('progress-bar-container').addEventListener("click", this.seek);
+	this.progressBarContainer.addEventListener("click", this.seek);
 };
 
 VimeoVideoPlayer.prototype.seek = function(e) {
@@ -86,24 +86,27 @@ VimeoVideoPlayer.prototype.seek = function(e) {
 };
 
 VimeoVideoPlayer.prototype.showAndHidePlayerControls = function() {
-	this.vimeoVideoPlayer.onmouseover = function() { 
-	    document.getElementById('player-controls').style.visibility = "visible";
+	self = this;
+	this.videoPlayerBody.onmouseover = function() { 
+	    self.playerControls.style.visibility = "visible";
 	}
-	this.vimeoVideoPlayer.onmouseout = function() { 
-	    document.getElementById('player-controls').style.visibility = "hidden";
+	this.videoPlayerBody.onmouseout = function() { 
+	    self.playerControls.style.visibility = "hidden";
 	}
 
 };
 
 VimeoVideoPlayer.prototype.changePlayerButtonColor = function() {
-	
-	var playPauseButton = document.getElementById('play-pause-button');
+	// At this moment in time: "this" is the VimeoVideoPlayer Object
+	//var self = this;
+	//var playPauseButton = document.getElementById('play-pause-button');
 
 	this.playPauseButton.onmouseover = function() { 
-	    playPauseButton.style.background = "rgba(0, 173, 239,.75)";
+		// At this moment in time: "this" is the playPauseButton DOM element.
+	    this.style.background = "rgba(0, 173, 239,.75)";
 	}	
 	this.playPauseButton.onmouseout = function() { 
-	    playPauseButton.style.background = "rgba(23,35,34,.75)";
+	    this.style.background = "rgba(23,35,34,.75)";
 	}
 
 };
@@ -223,14 +226,24 @@ function updateBufferBar() {
 }
 */
 
-var vimeoVideoPlayer = new VimeoVideoPlayer();
-vimeoVideoPlayer.init();
+var vimeoVideoPlayer = new VimeoVideoPlayer(document.getElementById("vimeo-video-player"));
 vimeoVideoPlayer.showAndHidePlayerControls(); 
 vimeoVideoPlayer.changePlayerButtonColor();
 vimeoVideoPlayer.updateProgressAndBufferBar();
 vimeoVideoPlayer.updateVideoProgressOnClick();
 
+
+function cool() {
+	console.log("cool");
+};
+document.getElementById('video-player').addEventListener('timeupdate', cool, false);
+
+//vimeoVideoPlayer.videoPlayer.addEventListener('timeupdate', vimeoVideoPlayer.updateProgressBar(), false);
+document.getElementById('video-player').addEventListener('timeupdate', vimeoVideoPlayer.updateProgressBar(), false);
+//vimeoVideoPlayer.videoPlayer.addEventListener('progress', vimeoVideoPlayer.updateBufferBar());
 document.getElementById('video-player').addEventListener('progress', vimeoVideoPlayer.updateBufferBar());
+
+
 
 function togglePlayPause() {
 	vimeoVideoPlayer.togglePlayPause();

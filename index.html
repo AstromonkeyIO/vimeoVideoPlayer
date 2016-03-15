@@ -7,12 +7,13 @@
 </head>
 
 <body>
-	<div id='vimeo-video-player'><!--media-player-->
-		<video id='video-player' preload='auto'><!--media-video-->
+
+	<div id='vimeo-video-player' class="vimeo-video-player"><!--media-player-->
+		<video id='video-player' preload='auto' class="video-player"><!--media-video-->
 			<source src="https://player.vimeo.com/external/76979871.hd.mp4?s=700bf8f30f8f8114cc372e94c4156aaf&profile_id=113" type="video/mp4">
         </video>
         <div id="player-controls" class="player-controls" visibility="hidden">
-           <button id='play-pause-button' class="play-button"
+           <button id='play-pause-button' class="play-pause-button"
 			onclick='togglePlayPause();'>
 				<div id="play-icon" class="play-icon">
 					<svg viewBox="0 0 20 20" preserveAspectRatio="xMidYMid">
@@ -27,13 +28,14 @@
 				</div>
 			</button>
 			<div class="rounded-box">
-				<div id="progress-bar-container" class="progress">
-					<div id="buffer-bar" class="loaded"></div>
-					<div id="progress-bar" class="played"></div>
+				<div class="progress-bar-container">
+					<div class="buffer-bar"></div>
+					<div id="progress-bar" class="progress-bar"></div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<script src='video.js'></script> 
 </body>
 </html>
