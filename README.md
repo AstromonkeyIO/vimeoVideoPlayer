@@ -10,6 +10,9 @@ Features Implemented
 FYI
 - I purposely made the progress bars bigger since I personally think that a lot of video players have really small progress bar and it is difficult for the users to click and drag. 
 
+Running the code
+- Please go to the project directory on the terminal and type in "python -m SimpleHTTPServer". This will run the project locally. 
+
 Thank you for giving me an interesting project to work on. This not only helped me demonstrate my skillsets for opportunities at Vimeo but also learn along the way. I'm a big fan of Vimeo and I really hope to talk to you guys soon. 
 
 Cheers,
