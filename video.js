@@ -21,7 +21,7 @@ var VimeoVideoPlayer = function(rootElement) {
     this.currentVideoProgress = 0;
 	this.currentBufferProgress = 0;
 
-	self = this;
+	var self = this;
 
 	// update current video time
 	this.videoPlayer.addEventListener('timeupdate', function() { 
@@ -57,6 +57,11 @@ var VimeoVideoPlayer = function(rootElement) {
 	    self.videoPlayer.currentTime = percent * self.videoPlayer.duration;
 	    self.progressBar.style.width = percent / 100;
 
+	});
+
+	// setup for play-pause button toggle
+	this.playPauseButton.addEventListener("click", function() {
+		self.togglePlayPause();
 	});
 
 };
@@ -102,10 +107,7 @@ VimeoVideoPlayer.prototype.changePlayerButtonColor = function() {
 
 };
 
-//Initialize video player
+//Initialize and setup video player
 var vimeoVideoPlayer = new VimeoVideoPlayer(document.getElementById("vimeo-video-player-example"));
 vimeoVideoPlayer.showAndHidePlayerControls(); 
 vimeoVideoPlayer.changePlayerButtonColor();
-function togglePlayPause() {
-	vimeoVideoPlayer.togglePlayPause();
-};
